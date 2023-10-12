@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Survey Form</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+         .container {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+.bg{
+    background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+}
+.bgc{
+   background-color: rgb(216, 240, 239);
+}
+body {
+  font-family: montserrat, arial, verdana;
+  background: 
+    linear-gradient(rgba(196, 102, 0, 0.6), rgba(155, 89, 182, 0.6));
+}
+/*form styles*/
+
+    label {
+      display: block;
+      font-weight: bold;
+    }
+    h1{
+        font-weight: bold; 
+        margin: 0 0 30px;
+  padding: 0;
+  text-align: center;
+    }
+    .login-box {
+  width: 100%;
+  height: 100%;
+  padding: 40px;
+  background: rgb(224, 231, 199);
+  box-sizing: border-box;
+  box-shadow: 0 15px 25px rgba(0,0,0,.6);
+  border-radius: 10px;
+}
+    </style>
+</head>
+<body> 
+    
+    <div class=" container mt-4 ">
+       <b>   <h1>SURVEY FORM</h1></b>
+        <form id="surveyForm" class="login-box">
+            <div class="form-group">
+                <label for="firstName">FIRST NAME</label>
+                <input type="text" class="form-control" id="firstName" required>
+            </div>
+            <div class="form-group">
+                <label for="lastName">LAST NAME</label>
+                <input type="text" class="form-control" id="lastName" required>
+            </div>
+            <div class="form-group">
+                <label for="dob">DATE OF BIRTH</label>
+                <input type="date" class="form-control" id="dob" required>
+            </div>
+            <div class="form-group">
+                <label for="country">COUNTRY</label>
+                <select class="form-control" id="country" required>
+                    <option value="India">India</option>
+                    <option value="America">America</option>
+                    <option value="UK">UK</option>
+                    <option value="china">China</option>
+                    <option value="Japan">Japan</option>
+                    <option value="UK">United Kingdom</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>GENDER</label>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="male" name="gender" value="Male">
+                    <label class="form-check-label" for="male">Male</label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="female" name="gender" value="Female">
+                    <label class="form-check-label" for="female">Female</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="profession">PROFESSION</label>
+                <input type="text" class="form-control" id="profession" required>
+            </div>
+            <div class="form-group">
+                <label for="email">EMAIL</label>
+                <input type="email" class="form-control" id="email" required>
+            </div>
+            <div class="form-group">
+                <label for="mobile">MOBLIE</label>
+                <input type="tel" class="form-control" id="mobile" required>
+            </div>
+            <button type="submit" class="btn btn-primary">SUBMIT</button>
+            <button type="reset" class="btn btn-secondary">RESET</button>
+        </form>
+    </div>
+    <div class="modal bg" id="submitModal">
+        <div class="modal-dialog">
+            <div class="modal-content bgc">
+                <div class="modal-header">
+                    <h4 class="modal-title" style="text-align:center ;font-weight: bold; ">SUBMITTED DATA</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body" id="modalBody">
+                </div>
+                <div class="modal-footer">
+                   <a href="survey_form.html"> <button type="button" class="btn btn-secondary" >Close</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#surveyForm').submit(function (e) {
+                e.preventDefault();
+                var formData = {
+                    'First Name': $('#firstName').val(),
+                    'Last Name': $('#lastName').val(),
+                    'Date of Birth': $('#dob').val(),
+                    'Country': $('#country').val(),
+                    'Gender': $('input[name="gender"]:checked').map(function() { return this.value; }).get().join(', '),
+                    'Profession': $('#profession').val(),
+                    'Email': $('#email').val(),
+                    'Mobile Number': $('#mobile').val()
+                };
+
+                var modalBody = $('#modalBody');
+                modalBody.empty();
+                for (var key in formData) {
+                    modalBody.append('<p><strong>' + key + ':</strong> ' + formData[key] + '</p>');
+                }
+
+                $('#submitModal').modal('show');
+            });
+        });
+    </script>
+</body>
+</html>
